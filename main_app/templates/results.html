@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Consensus picks</h4>
+
+<div class="row">
+    <div class="col s6">
+        <table>
+            <thead>
+                <tr><th>Song</th><th>Artist</th><th>Votes</th></tr>
+            </thead>
+            <tbody>
+                {% for song in artist.song_set.all %}
+                <tr>
+                    <td>{{ song.song_name }}</td>
+                    <td>{{ song.artist.artist_name }}</td>
+                    <td>{{ song.occurence }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>    
+
+{% endblock %}

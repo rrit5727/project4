@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Project 4</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h4>Welcome to Meta-lyric</h4>
+    <h5>Generate consensus</h5>
+    <form action="{% url 'generate' %}" method="get">
+        <input type="submit" value="Generate">
+    </form>
+
+{% endblock %}
