@@ -20,4 +20,4 @@ class Song(models.Model):
     occurence = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.song_name

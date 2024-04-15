@@ -45,7 +45,7 @@ def generate(request):
         for scraped_artist_name, scraped_songs in scraped_song_dict.items():
             artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)
             for scraped_song_name in scraped_songs:
-                song, created = Song.objects.get_or_create(song_name=scraped_song_name, artist_name=scraped_artist_name)
+                song, created = Song.objects.get_or_create(song_name=scraped_song_name, artist=artist)
                 if not created:
                     song.occurence += 1
                     song.save()
@@ -57,4 +57,6 @@ def generate(request):
     songs = Song.objects.all()
     artists = Artist.objects.all()
 
-    return render(request, 'results,html', {'songs':songs, 'artists':artists})
+    print(generate(request))
+    return render(request, 'results.html', {'songs':songs, 'artists':artists})
+    

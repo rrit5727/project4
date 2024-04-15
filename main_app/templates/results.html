@@ -10,10 +10,10 @@
                 <tr><th>Song</th><th>Artist</th><th>Votes</th></tr>
             </thead>
             <tbody>
-                {% for song in artist.song_set.all %}
+                {% for song in songs %}
                 <tr>
                     <td>{{ song.song_name }}</td>
-                    <td>{{ song.artist.artist_name }}</td>
+                    <!-- <td>{{ song.artist.artist_name }}</td> -->
                     <td>{{ song.occurence }}</td>
                 </tr>
                 {% endfor %}
