@@ -166,29 +166,32 @@ def scrape_songs(url):
 #     return scraped_song_dict
 
 
-def tidy_slant(scraped_songs):
-    scraped_song_dict = {}
-    for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('"','').strip()
-        parts = cleaned_song.split(', ')
-        scraped_song_name = parts[1]
-        scraped_artist = parts[0]
-        scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-    print(scraped_song_dict)
-    return scraped_song_dict
-
-
-# def tidy_uproxx(scraped_songs):
+# def tidy_slant(scraped_songs):
 #     scraped_song_dict = {}
-#     for scraped_song in scraped_songs:
-#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
-#         parts = cleaned_song.split(' – ')
+#     for i, scraped_song in enumerate(scraped_songs):
+#         print(f"Iteration: {i}, {scraped_song}")
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('"','').strip()
+#         parts = cleaned_song.split(', ')
 #         scraped_song_name = parts[1]
 #         scraped_artist = parts[0]
 #         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
 #     print(scraped_song_dict)
 #     return scraped_song_dict
+
+
+def tidy_uproxx(scraped_songs):
+    scraped_song_dict = {}
+    for i, scraped_song in enumerate(scraped_songs):
+        print(f"Iteration: {i}, {scraped_song}")
+        cleaned_song = scraped_song.replace('"','').strip()
+        parts = re.split(r'\s*[—–]\s*', cleaned_song, maxsplit=1)
+        if len(parts) == 2:
+            scraped_artist, scraped_song_name = parts
+            scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+        else: 
+            print(f"Error splitting song: {cleaned_song}")
+    # print(scraped_song_dict)
+    return scraped_song_dict
 
 
 
@@ -203,8 +206,8 @@ def generate(request):
     # 'https://www.bbc.com/news/entertainment-arts-67617420',                           N/A            
     # 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',        N/A
     # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
-    'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
-    # 'https://uproxx.com/music/best-songs-2023-list/',
+    # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
+    'https://uproxx.com/music/best-songs-2023-list/',
 ]
 
     for url in urls:
