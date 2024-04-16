@@ -209,21 +209,35 @@ def scrape_songs(url):
 #     return scraped_song_dict
 
 
-def tidy_gq(scraped_songs):
+# def tidy_gq(scraped_songs):
+#     scraped_song_dict = {}
+#     for i, scraped_song in enumerate(scraped_songs):
+#         print(f"Iteration: {i}, {scraped_song}")
+#         cleaned_song = scraped_song.replace('"','').strip()
+#         parts = re.split(r'\s*[—-]\s*', cleaned_song, maxsplit=1)
+#         if len(parts) == 2:
+#             scraped_artist, scraped_song_name = parts
+#             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#         else: 
+#             print(f"Error splitting song: {cleaned_song}")
+#     # print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+def tidy_harper(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.replace('"','').strip()
-        parts = re.split(r'\s*[—-]\s*', cleaned_song, maxsplit=1)
-        if len(parts) == 2:
-            scraped_artist, scraped_song_name = parts
-            scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+        if i >= 20:
+            break
         else: 
-            print(f"Error splitting song: {cleaned_song}")
-    # print(scraped_song_dict)
+            cleaned_song = scraped_song.replace('"','').strip()
+            parts = cleaned_song.split(' by ')
+            scraped_song_name = parts[1]
+            scraped_artist = parts[0]
+            scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+    print(scraped_song_dict)
     return scraped_song_dict
-
-
 
 
 
@@ -247,8 +261,8 @@ def generate(request):
     # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
     # 'https://uproxx.com/music/best-songs-2023-list/',
     # 'https://time.com/6340132/best-songs-2023/',
-    'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
-    # 'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
+    # 'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
+    'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
     # 'https://www.treblezine.com/the-100-best-songs-of-2023/',
     # 'https://www.vulture.com/article/best-new-songs-2023.html'
 ]
@@ -283,6 +297,8 @@ def generate(request):
             scraped_song_dict = tidy_time(scraped_songs_list)
         elif 'gq' in url:
             scraped_song_dict = tidy_gq(scraped_songs_list)
+        elif 'harper' in url:
+            scraped_song_dict = tidy_harper(scraped_songs_list)
         
         
 
