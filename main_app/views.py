@@ -32,7 +32,7 @@ def scrape_songs(url):
         for song in song_details:
             scraped_songs.append(song.text)
 
-        print (scraped_songs)        
+        # print (scraped_songs)        
         return scraped_songs
 
     else:
@@ -49,29 +49,30 @@ def scrape_songs(url):
 #         scraped_song_name = parts[1]
 #         scraped_artist = parts[0]
 #         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
-#     return scraped_song_dict
-
-
-# def tidy_consequence(scraped_songs):
-#     scraped_song_dict = {}     
-#     for i, scraped_song in enumerate(scraped_songs):
-#         print(F"Iteration {i}: {scraped_song}")
-#         if not scraped_song.strip():
-#             continue
-#         elif i == 166:
-#             cleaned_song = scraped_song.split('.', 1)[1].replace('"','').strip()
-#         elif i >= 201:
-#             break
-#         else:
-#             cleaned_song = scraped_song.split('. ', 1)[1].replace('"','').strip()
-#             parts = cleaned_song.split(' — ')
-#             scraped_song_name = parts[1]
-#             scraped_artist = parts[0]
-#             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-        
 #     # print(scraped_song_dict)
 #     return scraped_song_dict
+
+
+def tidy_consequence(scraped_songs):
+    scraped_song_dict = {}     
+    for i, scraped_song in enumerate(scraped_songs):
+        # print(F"Iteration {i}: {scraped_song}")
+        if not scraped_song.strip():
+            continue
+        elif i == 166:
+            cleaned_song = scraped_song.split('.', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+        elif i >= 201:
+            break
+        else:
+            cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+            print(cleaned_song)
+            parts = cleaned_song.split(' — ')
+            scraped_song_name = parts[1]
+            scraped_artist = parts[0]
+            scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+        
+    # print(scraped_song_dict)
+    return scraped_song_dict
 
 
 # def tidy_pitchfork(scraped_songs):
@@ -82,7 +83,7 @@ def scrape_songs(url):
 #         scraped_song_name = parts[1]
 #         scraped_artist = parts[0]
 #         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -98,7 +99,7 @@ def scrape_songs(url):
 #             scraped_song_name = parts[1]
 #             scraped_artist = parts[0]
 #             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -114,7 +115,7 @@ def scrape_songs(url):
 #             scraped_song_name = parts[1]
 #             scraped_artist = parts[0]
 #             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -127,7 +128,7 @@ def scrape_songs(url):
 #         scraped_song_name = parts[1]
 #         scraped_artist = parts[0]
 #         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -146,7 +147,7 @@ def scrape_songs(url):
 #                 scraped_song_name = parts[1]
 #                 scraped_artist = parts[0]
 #                 scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -162,7 +163,7 @@ def scrape_songs(url):
 #             scraped_song_name = parts[1]
 #             scraped_artist = parts[0]
 #             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -175,7 +176,7 @@ def scrape_songs(url):
 #         scraped_song_name = parts[1]
 #         scraped_artist = parts[0]
 #         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -205,7 +206,7 @@ def scrape_songs(url):
 #             scraped_song_name = parts[1]
 #             scraped_artist = parts[0]
 #             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
@@ -236,21 +237,21 @@ def scrape_songs(url):
 #             scraped_song_name = parts[1]
 #             scraped_artist = parts[0]
 #             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
+#     # print(scraped_song_dict)
 #     return scraped_song_dict
 
 
-def tidy_treble(scraped_songs):
-    scraped_song_dict = {}
-    for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('"','').strip()
-        parts = cleaned_song.split(' – ')
-        scraped_song_name = parts[1]
-        scraped_artist = parts[0]
-        scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-    print(scraped_song_dict)
-    return scraped_song_dict
+# def tidy_treble(scraped_songs):
+#     scraped_song_dict = {}
+#     for i, scraped_song in enumerate(scraped_songs):
+#         # print(f"Iteration: {i}, {scraped_song}")
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('"','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     # print(scraped_song_dict)
+#     return scraped_song_dict
 
 
 
@@ -260,21 +261,18 @@ def tidy_treble(scraped_songs):
 def generate(request):
     urls = [
     # 'https://www.nme.com/en_au/features/music-features/best-songs-of-2023-3-3552893',
-    # 'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
+    'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
     # 'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
     # 'https://variety.com/lists/the-best-songs-of-2023/', 
-    # 'https://www.rollingstone.com/music/music-lists/best-songs-of-2023-1234879541/', N/A
     # 'https://www.billboard.com/lists/best-songs-2023/',
-    # 'https://www.bbc.com/news/entertainment-arts-67617420',                           N/A            
-    # 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',        N/A
     # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
     # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
     # 'https://uproxx.com/music/best-songs-2023-list/',
     # 'https://time.com/6340132/best-songs-2023/',
     # 'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
     # 'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
-    'https://www.treblezine.com/the-100-best-songs-of-2023/',
-    # 'https://www.vulture.com/article/best-new-songs-2023.html'
+    # 'https://www.treblezine.com/the-100-best-songs-of-2023/',
+    
 ]
 
     for url in urls:
@@ -313,6 +311,7 @@ def generate(request):
             scraped_song_dict = tidy_treble(scraped_songs_list)
         
         
+        
 
 
         # scraped_songs_list = scrape_songs(url)
@@ -322,7 +321,7 @@ def generate(request):
         # scraped_song_dict = tidy_nme(scraped_songs_list)
 
         for scraped_artist_name, scraped_song in scraped_song_dict.items():
-                print(scraped_artist_name)
+                # print(scraped_artist_name, scraped_song)
                 artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
                 song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
                 if not created:
