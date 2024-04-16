@@ -85,32 +85,36 @@ def scrape_songs(url):
 #     return scraped_song_dict
 
 
-def tidy_variety(scraped_songs):
+# def tidy_variety(scraped_songs):
+#     scraped_song_dict = {}
+#     for i, scraped_song in enumerate(scraped_songs):
+#         print(F"Iteration {i}: {scraped_song}")
+#         if i >= 65:
+#             break
+#         else:
+#             cleaned_song = scraped_song.replace('\'','').strip()
+#             parts = cleaned_song.split(', ')
+#             scraped_song_name = parts[1]
+#             scraped_artist = parts[0]
+#             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+def tidy_billboard(scraped_songs):
     scraped_song_dict = {}
-    for i, scraped_song in enumerate(scraped_songs):
+    for i, scraped_song in enumerate(scraped_songs):    
         print(F"Iteration {i}: {scraped_song}")
-        if i >= 65:
+        if i >= 100:
             break
-        else:
-            cleaned_song = scraped_song.replace('\'','').strip()
+        else: 
+            cleaned_song = scraped_song.replace('"','').strip()
             parts = cleaned_song.split(', ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     print(scraped_song_dict)
     return scraped_song_dict
-
-
-# def tidy_billboard(scraped_songs):
-#     scraped_song_dict = {}
-#     for scraped_song in scraped_songs:
-#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
-#         parts = cleaned_song.split(' – ')
-#         scraped_song_name = parts[1]
-#         scraped_artist = parts[0]
-#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
-#     return scraped_song_dict
 
 
 # def tidy_bbc(scraped_songs):
@@ -179,9 +183,9 @@ def generate(request):
     # 'https://www.nme.com/en_au/features/music-features/best-songs-of-2023-3-3552893',
     # 'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
     # 'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
-    'https://variety.com/lists/the-best-songs-of-2023/',
+    # 'https://variety.com/lists/the-best-songs-of-2023/',
     # 'https://www.rollingstone.com/music/music-lists/best-songs-of-2023-1234879541/',
-    # 'https://www.billboard.com/lists/best-songs-2023/',
+    'https://www.billboard.com/lists/best-songs-2023/',
     # 'https://www.bbc.com/news/entertainment-arts-67617420',
     # 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',
     # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
