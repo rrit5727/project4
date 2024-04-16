@@ -130,31 +130,39 @@ def scrape_songs(url):
 #     return scraped_song_dict
 
 
-def tidy_blahdian(scraped_songs):
+# def tidy_blahdian(scraped_songs):
+#     scraped_song_dict = {}
+#     for i, scraped_song in enumerate(scraped_songs):
+#         print(f"Iteration {i}: {scraped_song}")
+#         if re.match(r'^\d+\n', scraped_song):
+#             continue
+#         elif i >= 38:
+#             break
+#         else:
+#             cleaned_song = scraped_song.strip()
+#             parts = re.split(r'^(\d+)\s+', cleaned_song, maxsplit=1)
+#             if len(parts) == 2:
+#                 scraped_song_name = parts[1]
+#                 scraped_artist = parts[0]
+#                 scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+def tidy_esquire(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         print(f"Iteration {i}: {scraped_song}")
-        if re.match(r'^\d+\n', scraped_song):
-            continue
-        else:
-            parts = scraped_song.split(' – ')
+        if i >= 20:
+            break
+        else: 
+            cleaned_song = scraped_song.replace('"','').strip()
+            parts = cleaned_song.split(', ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     print(scraped_song_dict)
     return scraped_song_dict
-
-
-# def tidy_esquire(scraped_songs):
-#     scraped_song_dict = {}
-#     for scraped_song in scraped_songs:
-#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
-#         parts = cleaned_song.split(' – ')
-#         scraped_song_name = parts[1]
-#         scraped_artist = parts[0]
-#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-#     print(scraped_song_dict)
-#     return scraped_song_dict
 
 
 # def tidy_slant(scraped_songs):
@@ -191,8 +199,8 @@ def generate(request):
     # 'https://www.rollingstone.com/music/music-lists/best-songs-of-2023-1234879541/',
     # 'https://www.billboard.com/lists/best-songs-2023/',
     # 'https://www.bbc.com/news/entertainment-arts-67617420',
-    'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',
-    # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
+    # 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023', N/A
+    'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
     # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
     # 'https://uproxx.com/music/best-songs-2023-list/',
 ]
@@ -203,7 +211,7 @@ def generate(request):
             return HttpResponse("failed to scrape songs")
         
 
-        if 'nme' in url:
+        if 'nme.' in url:
             scraped_song_dict = tidy_nme(scraped_songs_list)
         elif 'consequence' in url:
             scraped_song_dict = tidy_consequence(scraped_songs_list)
@@ -217,7 +225,7 @@ def generate(request):
             scraped_song_dict = tidy_bbc(scraped_songs_list)
         elif 'guardian' in url:
             scraped_song_dict = tidy_blahdian(scraped_songs_list)
-        elif 'equire' in url:
+        elif 'esquire' in url:
             scraped_song_dict = tidy_esquire(scraped_songs_list)
         elif 'slant' in url:
             scraped_song_dict = tidy_slant(scraped_songs_list)
