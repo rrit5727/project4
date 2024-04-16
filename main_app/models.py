@@ -11,7 +11,7 @@ class Artist(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.artist_name
 
 
 class Song(models.Model):
