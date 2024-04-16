@@ -15,6 +15,8 @@ def home(request):
     # return render(request, 'about.html')
 
 
+
+
 def scrape_songs(url):
     # Send a GET request to the URL
     response = requests.get(url, verify=False)
@@ -29,7 +31,7 @@ def scrape_songs(url):
         for song in song_details:
             scraped_songs.append(song.text)
 
-        # print (scraped_songs)
+        print (scraped_songs)        
         return scraped_songs
 
     else:
@@ -37,34 +39,196 @@ def scrape_songs(url):
         print(f"Failed to retrieve HTML: {response.status_code}")
 
 
-def tidy_nme(scraped_songs):
-    scraped_song_dict = {}
-    for scraped_song in scraped_songs:
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
-        parts = cleaned_song.split(' – ')
-        scraped_song_name = parts[1]
-        scraped_artist = parts[0]
-        scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
-    print(scraped_song_dict)
+# Clean up scraped songs for each publications's list:
+# def tidy_nme(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+def tidy_consequence(scraped_songs):
+
+    scraped_song_dict = {}     
+    for i, scraped_song in enumerate(scraped_songs):
+        print(F"Iteration {i}: {scraped_song}")
+        if not scraped_song.strip():
+            continue
+        elif i == 166:
+            cleaned_song = scraped_song.split('.', 1)[1].replace('"','').strip()
+        elif i >= 201:
+            break
+        else:
+            cleaned_song = scraped_song.split('. ', 1)[1].replace('"','').strip()
+            parts = cleaned_song.split(' — ')
+            scraped_song_name = parts[1]
+            scraped_artist = parts[0]
+            scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+        
+    # print(scraped_song_dict)
     return scraped_song_dict
 
+
+# def tidy_pitchfork(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_variety(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_billboard(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_bbc(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_blahdian(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_esquire(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_slant(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+# def tidy_uproxx(scraped_songs):
+#     scraped_song_dict = {}
+#     for scraped_song in scraped_songs:
+#         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+#         parts = cleaned_song.split(' – ')
+#         scraped_song_name = parts[1]
+#         scraped_artist = parts[0]
+#         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
+#     print(scraped_song_dict)
+#     return scraped_song_dict
+
+
+
 def generate(request):
-    url = 'https://www.nme.com/en_au/features/music-features/best-songs-of-2023-3-3552893'
+    urls = [
+    # 'https://www.nme.com/en_au/features/music-features/best-songs-of-2023-3-3552893',
+    'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
+    # 'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
+    # 'https://variety.com/lists/the-best-songs-of-2023/',
+    # 'https://www.rollingstone.com/music/music-lists/best-songs-of-2023-1234879541/',
+    # 'https://www.billboard.com/lists/best-songs-2023/',
+    # 'https://www.bbc.com/news/entertainment-arts-67617420',
+    # 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',
+    # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
+    # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
+    # 'https://uproxx.com/music/best-songs-2023-list/',
+]
 
-    scraped_songs_list = scrape_songs(url)
-    if scraped_songs_list is None:
-        return HttpResponse("failed to scrape songs")
-    
-    scraped_song_dict = tidy_nme(scraped_songs_list)
+    for url in urls:
+        scraped_songs_list = scrape_songs(url)
+        if scraped_songs_list is None:
+            return HttpResponse("failed to scrape songs")
+        
 
-    for scraped_artist_name, scraped_song in scraped_song_dict.items():
-            print(scraped_artist_name)
-            artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)
-            
-            song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
-            if not created:
-                song.occurence += 1
-                song.save()
+        if 'nme' in url:
+            scraped_song_dict = tidy_nme(scraped_songs_list)
+        elif 'consequence' in url:
+            scraped_song_dict = tidy_consequence(scraped_songs_list)
+        elif 'pitchfork' in url:
+            scraped_song_dict = tidy_pitchfork(scraped_songs_list)
+        elif 'variety' in url:
+            scraped_song_dict = tidy_variety(scraped_songs_list)
+        elif 'billboard' in url:
+            scraped_song_dict = tidy_billboard(scraped_songs_list)
+        elif 'bbc' in url:
+            scraped_song_dict = tidy_bbc(scraped_songs_list)
+        elif 'guardian' in url:
+            scraped_song_dict = tidy_blahdian(scraped_songs_list)
+        elif 'equire' in url:
+            scraped_song_dict = tidy_esquire(scraped_songs_list)
+        elif 'slant' in url:
+            scraped_song_dict = tidy_slant(scraped_songs_list)
+        elif 'uproxx' in url:
+            scraped_song_dict = tidy_uproxx(scraped_songs_list)
+        
+        
+
+
+        # scraped_songs_list = scrape_songs(url)
+        # if scraped_songs_list is None:
+        #     return HttpResponse("failed to scrape songs")
+        
+        # scraped_song_dict = tidy_nme(scraped_songs_list)
+
+        for scraped_artist_name, scraped_song in scraped_song_dict.items():
+                print(scraped_artist_name)
+                artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
+                song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
+                if not created:
+                    song.occurence += 1
+                    song.save()
 
     songs = Song.objects.all()
     artists = Artist.objects.all()
