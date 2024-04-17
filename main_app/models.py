@@ -17,7 +17,7 @@ class Artist(models.Model):
 class Song(models.Model):
     song_name = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, default=1)
-    occurence = models.IntegerField(default=0)
+    occurence = models.IntegerField(default=1)
 
     def __str__(self):
         return self.song_name
