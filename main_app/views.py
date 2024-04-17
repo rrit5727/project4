@@ -40,14 +40,75 @@ def scrape_songs(url):
         print(f"Failed to retrieve HTML: {response.status_code}")
 
 
+
+def remove_duplicates(scraped_song_name, scraped_artist):
+    if 'liar' in scraped_song_name.lower():
+        scraped_song_name = 'boys a liar'
+        scraped_artist = 'pinkpantheress & ice spice'
+        
+    elif 'bluebeard' in scraped_song_name.lower():
+        scraped_song_name = 'Eve, Psyche & the Bluebeard\'s Wife'
+        scraped_artist = 'le sserafim'
+        
+    elif 'just ken' in scraped_song_name.lower():
+        scraped_song_name = 'Im Just Ken'
+        scraped_artist = 'ryan gosling'
+        
+    elif 'sprinter' in scraped_song_name.lower():
+        scraped_song_name = 'sprinter'
+        scraped_artist = 'Dave & Central Cee'
+        
+    elif 'pound town' in scraped_song_name.lower():
+        scraped_song_name = 'pound town'
+        scraped_artist = 'sexy redd'
+        
+    elif 'on my mama' in scraped_song_name.lower():
+        scraped_song_name = 'on my mama'
+        scraped_artist = 'victoria monet'
+        
+    elif 'eva' in scraped_song_name.lower():
+        scraped_song_name = '4eva'
+        scraped_artist = 'kaytramine'
+        
+    elif 'hillbillies' in scraped_song_name.lower():
+        scraped_song_name = 'the hillbillies'
+        scraped_artist = 'baby keem & kendrick lamar'
+        
+    elif 'knockin' in scraped_song_name.lower():
+        scraped_song_name = 'knockin'
+        scraped_artist = 'mj lenderman'
+        
+    elif 'fly girl' in scraped_song_name.lower():
+        scraped_song_name = 'fly girl'
+        scraped_artist = 'flo'
+        
+    elif 'what it is' in scraped_song_name.lower():
+        scraped_song_name = 'what it is'
+        scraped_artist = 'doechii'
+        
+    elif 'california sober' in scraped_song_name.lower():
+        scraped_song_name = 'california sober'
+        scraped_artist = 'billy strings'
+        
+    elif 'welcome to my island' in scraped_song_name.lower():
+        scraped_song_name = 'welcome to my island'
+        scraped_artist = 'caroline polachek'             
+    else:
+        pass
+    
+    # Return the modified scraped song name and artist
+    return scraped_song_name, scraped_artist 
+
+
 # Clean up scraped songs for each publications's list:
 def tidy_nme(scraped_songs):
     scraped_song_dict = {}
     for scraped_song in scraped_songs:
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('’','').replace('‘','').strip()
+        cleaned_song = scraped_song.split('. ', 1)[1].replace('’','').replace('‘','').strip().lower()
         parts = cleaned_song.split(' – ')
         scraped_song_name = parts[1]
         scraped_artist = parts[0]
+        scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -60,15 +121,16 @@ def tidy_consequence(scraped_songs):
         if not scraped_song.strip():
             continue
         elif i == 166:
-            cleaned_song = scraped_song.split('.', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+            cleaned_song = scraped_song.split('.', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
         elif i >= 201:
             break
         else:
-            cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+            cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
             print(cleaned_song)
             parts = cleaned_song.split(' — ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
         
     # print(scraped_song_dict)
@@ -78,10 +140,11 @@ def tidy_consequence(scraped_songs):
 def tidy_pitchfork(scraped_songs):
     scraped_song_dict = {}
     for scraped_song in scraped_songs:
-        cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip()
+        cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = cleaned_song.split(': ')
         scraped_song_name = parts[1]
         scraped_artist = parts[0]
+        scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -94,10 +157,11 @@ def tidy_variety(scraped_songs):
         if i >= 65:
             break
         else:
-            cleaned_song = scraped_song.replace('\'','').strip()
+            cleaned_song = scraped_song.replace('\'','').strip().lower()
             parts = cleaned_song.split(', ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -110,10 +174,11 @@ def tidy_billboard(scraped_songs):
         if i >= 100:
             break
         else: 
-            cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip()
+            cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
             parts = cleaned_song.split(', ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -123,10 +188,11 @@ def tidy_bbc(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip()
+        cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip().lower()
         parts = cleaned_song.split(' – ')
         scraped_song_name = parts[1]
         scraped_artist = parts[0]
+        scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -141,11 +207,12 @@ def tidy_blahdian(scraped_songs):
         elif i >= 38:
             break
         else:
-            cleaned_song = scraped_song.strip()
+            cleaned_song = scraped_song.strip().lower()
             parts = re.split(r'^(\d+)\s+', cleaned_song, maxsplit=1)
             if len(parts) == 2:
                 scraped_song_name = parts[1]
                 scraped_artist = parts[0]
+                scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
                 scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -158,10 +225,11 @@ def tidy_esquire(scraped_songs):
         if i >= 20:
             break
         else: 
-            cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip()
+            cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
             parts = cleaned_song.split(', ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -171,10 +239,11 @@ def tidy_slant(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+        cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = cleaned_song.split(', ')
         scraped_song_name = parts[1]
         scraped_artist = parts[0]
+        scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -184,10 +253,11 @@ def tidy_uproxx(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip()
+        cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = re.split(r'\s*[—–]\s*', cleaned_song, maxsplit=1)
         if len(parts) == 2:
             scraped_artist, scraped_song_name = parts
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
         else: 
             print(f"Error splitting song: {cleaned_song}")
@@ -201,10 +271,11 @@ def tidy_time(scraped_songs):
         if i >= 10:
             break
         else: 
-            cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+            cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
             parts = cleaned_song.split(', ')
             scraped_song_name = parts[1]
             scraped_artist = parts[0]
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -214,10 +285,11 @@ def tidy_gq(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip()
+        cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = re.split(r'\s*[—-]\s*', cleaned_song, maxsplit=1)
         if len(parts) == 2:
             scraped_artist, scraped_song_name = parts
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_song_name.strip()] = scraped_artist.strip()
         else: 
             print(f"Error splitting song: {cleaned_song}")
@@ -232,10 +304,11 @@ def tidy_harper(scraped_songs):
         if i >= 20:
             break
         else: 
-            cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip()
+            cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
             parts = cleaned_song.split(' by ')
             scraped_song_name = parts[0]
             scraped_artist = parts[1]
+            scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
             scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
@@ -245,10 +318,11 @@ def tidy_treble(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
         # print(f"Iteration: {i}, {scraped_song}")
-        cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip()
+        cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = cleaned_song.split(' – ')
         scraped_song_name = parts[1]
         scraped_artist = parts[0]
+        scraped_song_name, scraped_artist = remove_duplicates(scraped_song_name, scraped_artist)
         scraped_song_dict[scraped_artist.strip()] = scraped_song_name.strip()
     # print(scraped_song_dict)
     return scraped_song_dict
