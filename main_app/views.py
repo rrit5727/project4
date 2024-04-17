@@ -5,6 +5,7 @@ import re
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Artist, Song
+from .fetch_genre import *
 
 # Create your views here.
 def home(request):
@@ -329,8 +330,10 @@ def tidy_treble(scraped_songs):
     return scraped_song_dict
 
 
-
-
+def retrieve_genre_for_scraped_song(scraped_artist_name):
+    result = search_for_artist(token, scraped_artist_name)
+    genre = result["genres"][0]
+    return genre
 
 
 def generate(request):
@@ -396,12 +399,20 @@ def generate(request):
         # scraped_song_dict = tidy_nme(scraped_songs_list)
 
         for scraped_artist_name, scraped_song in scraped_song_dict.items():
-                # print(scraped_artist_name, scraped_song)
+                # add scraped song and scraped artist to the DB:
                 artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
                 song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
                 if not created:
                     song.occurence += 1
                     song.save()
+
+                # add genre to the newly created artist's genre field:
+                # genre = retrieve_genre_for_scraped_song(scraped_artist_name)
+                # if genre: 
+                #     artist.genre = genre
+                #     artist.save()
+                # else: 
+                #     print(f"No genre found for artist: {scraped_artist_name}")
 
     songs = Song.objects.order_by('-occurence')
     
