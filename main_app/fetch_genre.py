@@ -6,14 +6,14 @@ import json
 
 load_dotenv()
 
-# artists = [
-#     'Ice Spice',
-#     'Dom Dolla',
-#     'mitski',
-#     'victoria monet',
-#     'amaarae',
-#     'Chappell roan',
-# ]
+artists = [
+    'Ice Spice',
+    'Dom Dolla',
+    'mitski',
+    'victoria monet',
+    'amaarae',
+    'Chappell roan',
+]
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
@@ -80,4 +80,4 @@ songs = get_genres_by_artist(token, artist_id)
 # for artist in artists:
 #     result = search_for_artist(token, artist)
 #     genre = result["genres"][0]
-    # print(genre)
+#     print(genre)

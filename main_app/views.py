@@ -189,7 +189,7 @@ def tidy_billboard(scraped_songs):
 def tidy_bbc(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
+        
         cleaned_song = scraped_song.split('. ', 1)[1].replace('\'','').strip().lower()
         parts = cleaned_song.split(' – ')
         scraped_song_name = parts[1]
@@ -240,7 +240,7 @@ def tidy_esquire(scraped_songs):
 def tidy_slant(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
+        
         cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = cleaned_song.split(', ')
         scraped_song_name = parts[1]
@@ -254,7 +254,7 @@ def tidy_slant(scraped_songs):
 def tidy_uproxx(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
+        
         cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = re.split(r'\s*[—–]\s*', cleaned_song, maxsplit=1)
         if len(parts) == 2:
@@ -269,7 +269,7 @@ def tidy_uproxx(scraped_songs):
 def tidy_time(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
+        
         if i >= 10:
             break
         else: 
@@ -286,7 +286,7 @@ def tidy_time(scraped_songs):
 def tidy_gq(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
+        # 
         cleaned_song = scraped_song.replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = re.split(r'\s*[—-]\s*', cleaned_song, maxsplit=1)
         if len(parts) == 2:
@@ -302,7 +302,7 @@ def tidy_gq(scraped_songs):
 def tidy_harper(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        print(f"Iteration: {i}, {scraped_song}")
+        # 
         if i >= 20:
             break
         else: 
@@ -319,7 +319,7 @@ def tidy_harper(scraped_songs):
 def tidy_treble(scraped_songs):
     scraped_song_dict = {}
     for i, scraped_song in enumerate(scraped_songs):
-        # print(f"Iteration: {i}, {scraped_song}")
+        # 
         cleaned_song = scraped_song.split('. ', 1)[1].replace('”', '').replace('“', '').replace('"', '').strip().lower()
         parts = cleaned_song.split(' – ')
         scraped_song_name = parts[1]
@@ -332,7 +332,7 @@ def tidy_treble(scraped_songs):
 
 def retrieve_genre_for_scraped_song(scraped_artist_name):
     result = search_for_artist(token, scraped_artist_name)
-    genre = result["genres"][0]
+    genre = result["genres"][0]  if result and result["genres"] else "other"
     return genre
 
 
@@ -398,27 +398,28 @@ def generate(request):
         
         # scraped_song_dict = tidy_nme(scraped_songs_list)
 
+        
         for scraped_artist_name, scraped_song in scraped_song_dict.items():
-                # add scraped song and scraped artist to the DB:
-                artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
-                song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
-                if not created:
-                    song.occurence += 1
-                    song.save()
+               
+            artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
+            song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
+            if not created:
+                song.occurence += 1
+                song.save()
 
-                # add genre to the newly created artist's genre field:
-                # genre = retrieve_genre_for_scraped_song(scraped_artist_name)
-                # if genre: 
-                #     artist.genre = genre
-                #     artist.save()
-                # else: 
-                #     print(f"No genre found for artist: {scraped_artist_name}")
+            genre = retrieve_genre_for_scraped_song(scraped_artist_name)
+            if genre: 
+                artist.genre = genre
+                artist.save()
+            else: 
+                print(f"No genre found for artist: {scraped_artist_name}")
+        
 
     songs = Song.objects.order_by('-occurence')
     
 
     return render(request, 'results.html', {'songs':songs })
-
+    
 
 
 
