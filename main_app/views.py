@@ -329,6 +329,31 @@ def tidy_treble(scraped_songs):
     # print(scraped_song_dict)
     return scraped_song_dict
 
+def genre_classifier(genre_added_to_scraped_artist):
+    parent_genres = [
+    'hiphop',
+    'pop',
+    'rock',
+    'grunge',
+    'indie',
+    'r&b',
+    'afro',
+    'rap',
+    'folk',
+    'punk',
+    'emo',
+    'dance',
+    'jazz',
+    'drill',
+    ]
+    
+    for parent_genre in parent_genres:
+        if parent_genre in genre_added_to_scraped_artist:
+            genre_added_to_scraped_artist = parent_genre
+            return parent_genre
+        else: 
+            pass
+
 
 def retrieve_genre_for_scraped_song(scraped_artist_name):
     result = search_for_artist(token, scraped_artist_name)
@@ -398,21 +423,27 @@ def generate(request):
         
         # scraped_song_dict = tidy_nme(scraped_songs_list)
 
-        
+        counter = 0
         for scraped_artist_name, scraped_song in scraped_song_dict.items():
-               
-            artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
-            song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
-            if not created:
-                song.occurence += 1
-                song.save()
+                artist, _ = Artist.objects.get_or_create(artist_name=scraped_artist_name)                
+                song, created = Song.objects.get_or_create(song_name=scraped_song, artist=artist)
+                if not created:
+                    song.occurence += 1
+                    song.save()
 
-            genre = retrieve_genre_for_scraped_song(scraped_artist_name)
-            if genre: 
-                artist.genre = genre
-                artist.save()
-            else: 
-                print(f"No genre found for artist: {scraped_artist_name}")
+                genre = retrieve_genre_for_scraped_song(scraped_artist_name)
+                print(f"genre: {genre}")
+                overwritten_genre = genre_classifier(genre)
+                print(f"overwritten_genre: {overwritten_genre}")
+                if overwritten_genre: 
+                    artist.genre = overwritten_genre
+                    artist.save()
+                else: 
+                    print(f"No genre found for artist: {scraped_artist_name}")
+
+                counter += 1
+                if counter >= 60:
+                    break
         
 
     songs = Song.objects.order_by('-occurence')

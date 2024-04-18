@@ -15,6 +15,8 @@ artists = [
     'Chappell roan',
 ]
 
+
+
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
@@ -54,9 +56,12 @@ def search_for_artist(token, artist_name):
         return None
     
     return json_result[0]
-
-
+    
     print(json_result)
+
+
+
+
 
 
 def get_genres_by_artist(token, artist_id):
