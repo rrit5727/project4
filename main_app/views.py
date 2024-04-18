@@ -17,7 +17,22 @@ def home(request):
     # return render(request, 'about.html')
 
 
-
+parent_genres = [
+    'hiphop',
+    'pop',
+    'rock',
+    'grunge',
+    'indie',
+    'r&b',
+    'afro',
+    'rap',
+    'folk',
+    'punk',
+    'emo',
+    'dance',
+    'jazz',
+    'drill',
+    ]
 
 def scrape_songs(url):
     # Send a GET request to the URL
@@ -329,6 +344,8 @@ def tidy_treble(scraped_songs):
     # print(scraped_song_dict)
     return scraped_song_dict
 
+
+
 def genre_classifier(genre_added_to_scraped_artist):
     parent_genres = [
     'hiphop',
@@ -364,17 +381,17 @@ def retrieve_genre_for_scraped_song(scraped_artist_name):
 def generate(request):
     urls = [
     'https://www.nme.com/en_au/features/music-features/best-songs-of-2023-3-3552893',
-    'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
-    'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
-    'https://variety.com/lists/the-best-songs-of-2023/', 
-    'https://www.billboard.com/lists/best-songs-2023/',
-    'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
-    'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
-    'https://uproxx.com/music/best-songs-2023-list/',
-    'https://time.com/6340132/best-songs-2023/',
-    'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
-    'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
-    'https://www.treblezine.com/the-100-best-songs-of-2023/',
+    # 'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
+    # 'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
+    # 'https://variety.com/lists/the-best-songs-of-2023/', 
+    # 'https://www.billboard.com/lists/best-songs-2023/',
+    # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
+    # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
+    # 'https://uproxx.com/music/best-songs-2023-list/',
+    # 'https://time.com/6340132/best-songs-2023/',
+    # 'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
+    # 'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
+    # 'https://www.treblezine.com/the-100-best-songs-of-2023/',
     
 ]
 
@@ -445,13 +462,20 @@ def generate(request):
                 if counter >= 60:
                     break
         
-
+    
+    
     songs = Song.objects.order_by('-occurence')
     
+    
+    context = {
+        'songs':songs, 
+        'genres':parent_genres,
+    }
 
-    return render(request, 'results.html', {'songs':songs })
+    return render(request, 'results.html', context)
     
 
-
+def filter_results(request):
+    songs = Song.objects.filter(genre=request)
 
     

@@ -3,6 +3,20 @@
 {% block content %}
 <h2>Consensus picks</h4>
 
+<div class="col s6">
+    <form action="{% url 'filter_results' %}" method="POST">
+        {% csrf_token %}
+        <label for="genre">Select genre</label>
+        <select name="genre" id="genre">
+            <option value="" disabled selected>Choose your genre</option>
+            {% for genre in genres %}
+            <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" class="btn" value="filter by genre">
+    </form>
+</div>
+
 <div class="row">
     <div class="col s6">
         <table>
@@ -23,4 +37,15 @@
     </div>
 </div>    
 
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+</script>
 {% endblock %}
