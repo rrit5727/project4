@@ -19,6 +19,7 @@ def home(request):
 
 parent_genres = [
     'hiphop',
+    'hip hop',
     'pop',
     'rock',
     'grunge',
@@ -349,6 +350,7 @@ def tidy_treble(scraped_songs):
 def genre_classifier(genre_added_to_scraped_artist):
     parent_genres = [
     'hiphop',
+    'hip hop',
     'pop',
     'rock',
     'grunge',
@@ -381,17 +383,17 @@ def retrieve_genre_for_scraped_song(scraped_artist_name):
 def generate(request):
     urls = [
     'https://www.nme.com/en_au/features/music-features/best-songs-of-2023-3-3552893',
-    # 'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
-    # 'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
-    # 'https://variety.com/lists/the-best-songs-of-2023/', 
-    # 'https://www.billboard.com/lists/best-songs-2023/',
-    # 'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
-    # 'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
-    # 'https://uproxx.com/music/best-songs-2023-list/',
-    # 'https://time.com/6340132/best-songs-2023/',
-    # 'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
-    # 'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
-    # 'https://www.treblezine.com/the-100-best-songs-of-2023/',
+    'https://consequence.net/2023/12/200-best-songs-of-2023-list/22/',
+    'https://pitchfork.com/features/lists-and-guides/best-songs-2023/',
+    'https://variety.com/lists/the-best-songs-of-2023/', 
+    'https://www.billboard.com/lists/best-songs-2023/',
+    'https://www.esquire.com/entertainment/music/g45778643/best-new-songs-2023/',
+    'https://www.slantmagazine.com/lists/the-50-best-songs-of-2023/',
+    'https://uproxx.com/music/best-songs-2023-list/',
+    'https://time.com/6340132/best-songs-2023/',
+    'https://www.gq-magazine.co.uk/culture/article/best-songs-2023',
+    'https://www.harpersbazaar.com/culture/art-books-music/g42862748/best-songs-2023/',
+    'https://www.treblezine.com/the-100-best-songs-of-2023/',
     
 ]
 
@@ -447,6 +449,9 @@ def generate(request):
                 if not created:
                     song.occurence += 1
                     song.save()
+
+                # artist.genre = retrieve_genre_for_scraped_song(scraped_artist_name)
+                # artist.save()
 
                 genre = retrieve_genre_for_scraped_song(scraped_artist_name)
                 print(f"genre: {genre}")
