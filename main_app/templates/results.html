@@ -16,6 +16,12 @@
         <input type="submit" class="btn" value="filter by genre">
     </form>
 </div>
+    
+<script defer>
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
+    console.log(elems)  
+</script>
 
 <div class="row">
     <div class="col s6">
@@ -41,11 +47,4 @@
 
 {% endblock %}
 
-{% block javascript %}
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems);
-  });
-</script>
-{% endblock %}
+

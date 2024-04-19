@@ -476,6 +476,10 @@ def generate(request):
     
 
 def filter_results(request):
-    songs = Song.objects.filter(genre=request)
+    selected_genre = request.POST.get('genre')
+    songs = Song.objects.filter(artist__genre=selected_genre)   
+    genre =  selected_genre
 
+    return render(request, 'filtered_results.html', {'songs':songs, 'genre':genre})
+    
     
