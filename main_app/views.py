@@ -2,10 +2,11 @@ from bs4 import BeautifulSoup
 import requests
 import re
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Artist, Song
 from .fetch_genre import *
+from main_app.playlist import *
 
 # Create your views here.
 def home(request):
@@ -482,9 +483,38 @@ def generate(request):
 
 def filter_results(request):
     selected_genre = request.POST.get('genre')
-    songs = Song.objects.filter(artist__genre=selected_genre)   
+    songs = Song.objects.filter(artist__genre=selected_genre).order_by('-occurence')   
     genre =  selected_genre
 
     return render(request, 'filtered_results.html', {'songs':songs, 'genre':genre})
     
+def generate_playlist(request):
+    spotify_id = request.POST.get('spotify_id')
+    playlist_name = request.POST.get('playlist_name')
+    playlist_length  = request.POST.get('playlist_length')
+    if playlist_length is not None: 
+        try:
+            playlist_length = int(playlist_length)
+        except ValueError:
+            playlist_length = 10
+    else:
+        playlist_length = 10
     
+
+    genre = request.POST.get('genre')
+
+    if genre:
+        selected_songs = Song.objects.filter(artist__genre=genre).order_by('-occurence')[:playlist_length]
+        songs = Song.objects.filter(artist__genre=genre).order_by('-occurence')
+    else:
+        selected_songs = Song.objects.order_by('-occurence')[:playlist_length]        
+        songs = Song.objects.order_by('-occurence')        
+
+    fetch_playlist(selected_songs, playlist_name, playlist_length)
+
+    context = {
+        'songs':songs, 
+        'genres':parent_genres,
+    }
+
+    return render(request, 'results.html', context)

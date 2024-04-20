@@ -4,6 +4,16 @@
 <h2>Consensus picks</h4>
 
 <div class="col s6">
+    <form action="{% url 'generate_playlist' %}" method="POST">
+        {% csrf_token %}
+        <label for="playlist">Generate playlist</label>        
+        <input type="text" id="playlist_name" name="playlist_name" value="Playlist name">
+        <input type="number" id="playlist_length" name="playlist_length" value="playlist length">
+        <input type="submit" class="btn" value="generate playlist">
+    </form>
+</div>
+
+<div class="col s6">
     <form action="{% url 'filter_results' %}" method="POST">
         {% csrf_token %}
         <label for="genre">Select genre</label>
@@ -16,7 +26,9 @@
         <input type="submit" class="btn" value="filter by genre">
     </form>
 </div>
-    
+
+
+
 <script defer>
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);

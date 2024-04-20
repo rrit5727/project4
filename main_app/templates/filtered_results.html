@@ -3,6 +3,18 @@
 {% block content %}
 <h2>Consensus by {{genre}}</h4>
 
+<div class="col s6">
+    <form action="{% url 'generate_playlist' %}" method="POST">
+        {% csrf_token %}
+        <label for="playlist">Generate playlist</label>        
+        <input type="text" id="playlist_name" name="playlist_name">
+        <input type="number" id="playlist_length" name="playlist_length">
+        <input type="hidden" name="genre" value="{{ genre }}"">
+        <input type="submit" class="btn" value="generate playlist">
+    </form>
+</div>
+    
+
 <div class="row">
     <div class="col s6">
         <table>
