@@ -7,7 +7,10 @@
     <form action="{% url 'generate_playlist' %}" method="POST">
         {% csrf_token %}
         <label for="playlist">Generate playlist</label>        
-        <input type="text" id="playlist_name" name="playlist_name" value="Playlist name">
+        <input type="text" id="playlist_name" name="playlist_name" value="Playlist name">        
+        <label for="spotify_id">Enter Spotify id</label>        
+        <input type="number" id="spotify_id" name="spotify_id" value="spotify_id">
+        <label for="playlist_length">Playlist length</label>        
         <input type="number" id="playlist_length" name="playlist_length" value="playlist length">
         <input type="submit" class="btn" value="generate playlist">
     </form>

@@ -6,14 +6,15 @@ import os
 
 load_dotenv()
 
-def fetch_playlist(selected_songs, playlist_name, playlist_length):
+def fetch_playlist(spotify_id, selected_songs, playlist_name):
     client_id = os.getenv("SPOTIPY_CLIENT_ID")
     client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
     redirect_uri = os.getenv("SPOTIPY_REDIRECT_URI")
 
 
     scope = 'playlist-modify-public'
-    username = '1230947442'
+    # username = '1230947442'
+    username = spotify_id
     token = SpotifyOAuth(scope=scope, username=username)
     spotifyObject = spotipy.Spotify(auth_manager = token)
 
