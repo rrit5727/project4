@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="welcome-sign">
-       <h4>Welcome to Meta-lyric</h4>
+    <section class="welcome-section">
+        <div class="welcome-sign">
+            <h4 class="section-title">Welcome to Meta-lyric</h4>
+        </div>
     </section>
-    <section class="generate-form">
-        <h4>Generate consensus</h5>
-        <form action="{% url 'generate' %}" method="get">
-            <input type="submit" value="Generate">
-        </form>
+    <section class="transition-section">
+    </section>
+    <section class="generate-section">
+        <div class="generate-form">
+            <h4 class="section-title">Generate consensus</h5>
+            <form action="{% url 'generate' %}" method="get">
+                <input type="submit" value="Generate">
+            </form>
+        </div>
+    </section>
+    <section class="transition-section">
+    </section>
+    <section class="publications-section">
+        <div>
+
+        </div>
+
     </section>
    
 

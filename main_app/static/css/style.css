@@ -8,14 +8,36 @@ body {
   margin: 0;
 }
 
+.welcome-section {
+  height: 80vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: whitesmoke;
+  padding: 20px;
+  background-image: url('https://mixmag.net/assets/uploads/images/CODA_Press-Pic_Alec-Donnell-Luna_DedAgency_02.JPG');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover
+  
+}
+
+.transition-section {
+  height: 30vh;
+  background-color: black;
+}
+
+
 .generate-section {
   height: 80vh;
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 20px;
-  background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
+  background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iMhttps://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover
@@ -42,16 +64,8 @@ main {
 }
 
 
-.welcome-sign {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 3px;
-  color: whitesmoke;
-  border-radius: 10px;
-  /* background-color: brown; */
-}
+
+
 
 .generate-form {
   display: flex;
@@ -68,4 +82,9 @@ main {
 footer.page-footer {
   padding-top: 0;
   text-align: right;
+}
+
+.section-title {
+  font-size: 4rem;
+  
 }
