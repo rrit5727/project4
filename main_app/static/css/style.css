@@ -47,11 +47,11 @@ body {
 .publications-section {
   height: 100vh;
   margin: 0;
-  display: flex;
+  display: flex;  
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding-top: 10px;
   background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBxEREQkODRYODRcMDQ8UFQkWIBsiIhgWHxYkKDQyJBooHxwWITEhKCozOi4+GitDODM1Nyg5PC8BCgoKDQ0NGg0QFysfHyYtLSsrLS0rLSstNysrODA4Ky0rKy0tKysrLS0rKysrKzc3Ky03LSsrKy03Ky0rKysrN//AABEIASwAqAMBIgACEQEDEQH/xAAZAAEBAQADAAAAAAAAAAAAAAAAAgEDBAf/xAAgEAEBAQACAQQDAAAAAAAAAAAAEQECMSEDBNHwUWGB/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAIDAf/EABoRAQEAAgMAAAAAAAAAAAAAAAARAVEhIkH/2gAMAwEAAhEDEQA/APDiKhFR2JhFQhCJhFQhCJhFQhCJhFQhCJhFQhCJhFQhCJhFQhCJhFQhCJhFQhCJFQIRooXFxIoIRIoIRIoIRIoIRIoIRIoIRIoIRIoIRIoIRLWhCKhGwjSKjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIxUCEVCNFxcZCNCEZCNCEZCNCEZCNCEZCNCEZCNCEZCNCEZCNCEZCNCEZBrSEaKGkVEighEighEighEighEighEighEighEighEighEighGwioRcVEwioQhEwioQhEwioQhEwioQhEwioQhEwioQhEwioQhEwioQhEwioQhEwVAhFQjRcXGQjQhGQjQhGQjQhGQjQhGQjQhGQjQhGQjQhGQjQhGQjQhGQaEIqEbCNIqMhGwhCMhGwhCMhGwhCMhGwhCMhGwhCMhGwhCMhGwhCMhGwhCMhGwhCMjFQIRUI2EXFxkI2EIRkI2EIRkI2EIRkI2EIRkI2EIRkI2EIRkI2EIRkI2EIRkI2EIRkGxpCNhFDSKiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYKCEaKhFxcSKhCESKhCESKhCESKhCESKhCESKhCESKhCESKhCESKhCESKgQioRo0ioyEaEIyEaEIyEaEIyEaEIyEaEIyEaEIyEaEIyEaEIyEaEIyDQhFChcVEighEighEighEighEighEighEighEighEighEighGioRcXEioQhEioQhEioQhEioQhEioQhEioQhEioQhEioQhEioQhEioEI2EUNIqJhFBCJhFBCJhFBCJhFBCJhFBCJhFBCJhFBCJhFBCJhFBCJgoIRQ0XFxg0IRg0IRg0IRg0IRg0IRg0IRg0IRg0IRg0IRg1pCNhGwjSKjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjIRsIQjINgQioRQuKiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYRQQiYKCEaKg0i0ighEighEighEighEighEighEighEkU3jy3jyzlneOQiYbx3Nm9uxnuPU3OV/Hjvx0nfcc97n37jnbSedOGDl5ev6nLNzd8f39/I7jGfXcP/2Q==');
   background-repeat: no-repeat;
   background-position: center;
@@ -92,13 +92,16 @@ footer.page-footer {
 }
 
 .row {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr, 2fr;
-  grid-template-rows: 1fr;
+  display: grid; 
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(3, 20vmin);
+  /* grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr); */
   
 }
 
-.pitchfork-icon {
-
+.publication-logo {
+  max-height: 10vmin;
+  max-width: 15vmin;
+  border-radius: 1vmin;
 }
