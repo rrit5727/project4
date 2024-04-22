@@ -1,14 +1,71 @@
+
+
+
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
+
+.generate-section {
+  height: 80vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover
   
-  main {
-    flex: 1 0 auto;
-  }
+}
+
+.publication-section {
+  height: 60vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover
   
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-  }
+}
+
+main {
+  flex: 1 0 auto;
+  margin: 0;
+}
+
+
+.welcome-sign {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3px;
+  color: whitesmoke;
+  border-radius: 10px;
+  /* background-color: brown; */
+}
+
+.generate-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  color: whitesmoke;
+  border-radius: 10px;
+  /* background-color: brown; */
+}
+
+
+footer.page-footer {
+  padding-top: 0;
+  text-align: right;
+}

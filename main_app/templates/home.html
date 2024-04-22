@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h4>Welcome to Meta-lyric</h4>
-    <h5>Generate consensus</h5>
-    <form action="{% url 'generate' %}" method="get">
-        <input type="submit" value="Generate">
-    </form>
+    <section class="welcome-sign">
+       <h4>Welcome to Meta-lyric</h4>
+    </section>
+    <section class="generate-form">
+        <h4>Generate consensus</h5>
+        <form action="{% url 'generate' %}" method="get">
+            <input type="submit" value="Generate">
+        </form>
+    </section>
+   
 
 {% endblock %}

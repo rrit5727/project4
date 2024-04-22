@@ -9,14 +9,15 @@
   <title>Meta-lyric</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'  %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css'  %}">
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Meta-lyric</a></li>
+          <li><a href="/" class="logo">&nbsp;&nbsp;Meta-lyric</a></li>
         </ul>
         <ul class="right">
           <li><a href="/about">About</a></li>
@@ -24,9 +25,13 @@
       </div>
     </nav>
   </header>
-  <main class="container">
-    {% block content %}
-    {% endblock %}
+  <main >
+    <section class="generate-section">
+      {% block content %}
+      {% endblock %}
+    </section>
+    <section class="publication-section">      
+    </section>
   </main>
   <footer class="page-footer">
   </footer>
