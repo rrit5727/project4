@@ -1,41 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Consensus by {{genre}}</h4>
+<section class="results-section">
+    <h2>Consensus by {{genre}}</h4>
 
-<div class="col s6">
-    <form action="{% url 'generate_playlist' %}" method="POST">
-        {% csrf_token %}
-        <label for="playlist">Generate playlist</label>        
-        <input type="text" id="playlist_name" name="playlist_name">
-        <input type="number" id="playlist_length" name="playlist_length">
-        <input type="number" id="spotify_id" name="spotify_id">
-        <input type="hidden" name="genre" value="{{ genre }}"">
-        <input type="submit" class="btn" value="generate playlist">
-    </form>
-</div>
-    
-
-<div class="row">
     <div class="col s6">
-        <table>
-            <thead>
-                <tr><th>Song</th><th>Artist</th><th>Votes</th></tr>
-            </thead>
-            <tbody>
-                {% for song in songs %}
-                <tr>
-                    <td>{{ song.song_name }}</td>
-                    <td>{{ song.artist.artist_name }}</td>
-                    <td>{{ song.occurence }}</td>
-                    <td>{{ song.artist.genre }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>    
-
+        <form action="{% url 'generate_playlist' %}" method="POST">
+            {% csrf_token %}
+            <label for="playlist">Generate playlist</label>        
+            <input type="text" id="playlist_name" name="playlist_name">
+            <input type="number" id="playlist_length" name="playlist_length">
+            <input type="number" id="spotify_id" name="spotify_id">
+            <input type="submit" class="btn" value="generate playlist">
+            <input type="hidden" name="genre" value="{{ genre }}"">
+        </form>
+       
+        
+    <div class="row">
+        <div class="col s6">
+            <table>
+                <thead>
+                    <tr><th>Song</th><th>Artist</th><th>Votes</th></tr>
+                </thead>
+                <tbody>
+                    {% for song in songs %}
+                    <tr>
+                        <td>{{ song.song_name }}</td>
+                        <td>{{ song.artist.artist_name }}</td>
+                        <td>{{ song.occurence }}</td>
+                        <td>{{ song.artist.genre }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</section>
 
 
 {% endblock %}

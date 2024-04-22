@@ -1,63 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Consensus picks</h4>
-
-<div class="col s6">
-    <form action="{% url 'generate_playlist' %}" method="POST">
-        {% csrf_token %}
-        <label for="playlist">Generate playlist</label>        
-        <input type="text" id="playlist_name" name="playlist_name" value="Playlist name">        
-        <label for="spotify_id">Enter Spotify id</label>        
-        <input type="number" id="spotify_id" name="spotify_id" value="spotify_id">
-        <label for="playlist_length">Playlist length</label>        
-        <input type="number" id="playlist_length" name="playlist_length" value="playlist length">
-        <input type="submit" class="btn" value="generate playlist">
-    </form>
-</div>
-
-<div class="col s6">
-    <form action="{% url 'filter_results' %}" method="POST">
-        {% csrf_token %}
-        <label for="genre">Select genre</label>
-        <select name="genre" id="genre">
-            <option value="" disabled selected>Choose your genre</option>
-            {% for genre in genres %}
-            <option value="{{ genre }}">{{ genre }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" class="btn" value="filter by genre">
-    </form>
-</div>
-
-
-
-<script defer>
-    var elems = document.querySelectorAll('select');
-    M.FormSelect.init(elems);
-    console.log(elems)  
-</script>
-
-<div class="row">
+<section class="results-section">
+    <h2>Consensus picks</h4>
     <div class="col s6">
-        <table>
-            <thead>
-                <tr><th>Song</th><th>Artist</th><th>Votes</th></tr>
-            </thead>
-            <tbody>
-                {% for song in songs %}
-                <tr>
-                    <td>{{ song.song_name }}</td>
-                    <td>{{ song.artist.artist_name }}</td>
-                    <td>{{ song.occurence }}</td>
-                    <td>{{ song.artist.genre }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <form class="form" action="{% url 'generate_playlist' %}" method="POST">
+            {% csrf_token %}
+            <label for="playlist">Generate playlist</label>        
+            <input type="text" id="playlist_name" name="playlist_name" value="Playlist name">        
+            <label for="spotify_id">Enter Spotify id</label>        
+            <input type="number" id="spotify_id" name="spotify_id" value="spotify_id">
+            <label for="playlist_length">Playlist length</label>        
+            <input type="number" id="playlist_length" name="playlist_length" value="playlist length">
+            <input type="submit" class="btn" value="generate playlist">
+        </form>
     </div>
-</div>    
 
+    <div class="col s8">
+        <form class="form" action="{% url 'filter_results' %}" method="POST">
+            {% csrf_token %}
+            <label for="genre">Select genre</label>
+            <select name="genre" id="genre">
+                <option value="" disabled selected>Choose your genre</option>
+                {% for genre in genres %}
+                <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" class="btn" value="filter by genre">
+        </form>
+    </div>
+
+
+
+    <script defer>
+        var elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);
+        console.log(elems)  
+    </script>
+
+    <div class="row">
+        <div class="col s6">
+            <table>
+                <thead>
+                    <tr><th>Song</th><th>Artist</th><th>Votes</th></tr>
+                </thead>
+                <tbody>
+                    {% for song in songs %}
+                    <tr>
+                        <td>{{ song.song_name }}</td>
+                        <td>{{ song.artist.artist_name }}</td>
+                        <td>{{ song.occurence }}</td>
+                        <td>{{ song.artist.genre }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</section>
+<section class="roll-results">    
+</section>
 
 
 {% endblock %}

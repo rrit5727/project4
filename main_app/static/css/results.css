@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+
+.results-section {
+    background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iMhttps://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: whitesmoke;
+    height: 50vh;
+    
+}
+
+.roll-results {
+    background-color: black;
+    height: 200vh;
+}
+
+.results-section table {
+    width: 100%;
+}
+
+.results-section th,
+.results-section  td {
+    padding: 8px;
+}
+
+.results-section th:nth-child(1)
+.results-section td:nth-child(1) {
+    width: 40%;
+}
+
+.results-section th:nth-child(2)
+.results-section td:nth-child(2) {
+    width: 30%;
+}
+
+.results-section th:nth-child(3)
+.results-section td:nth-child(3) {
+    width: 15%;
+
+}
+.results-section th:nth-child(4)
+.results-section td:nth-child(4) {
+    width: 15%;
+}
+
+
+
+.form {
+    color: whitesmoke;
+}
+
+
+
