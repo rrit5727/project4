@@ -2,21 +2,25 @@
 
 {% block content %}
 <section class="results-section">
-    <h2>Consensus by {{genre}}</h4>
-
-    <div class="col s6">
-        <form action="{% url 'generate_playlist' %}" method="POST">
+    
+    <div class="consensus-heading">
+        <h2>Consensus by {{genre}}</h4>
+        <h4>Generate a playlist</h3>
+        <form class="form" action="{% url 'generate_playlist' %}" method="POST">
             {% csrf_token %}
-            <label for="playlist">Generate playlist</label>        
-            <input type="text" id="playlist_name" name="playlist_name">
+                    
+            <input type="text" id="playlist_name" name="playlist_name" value="Playlist name">
+            <label for="spotify_id">Enter Spotify id</label>
+            <input type="number" id="spotify_id" name="spotify_id" value="spotify_id">
+            <label for="playlist_length">Playlist length</label>
             <input type="number" id="playlist_length" name="playlist_length">
-            <input type="number" id="spotify_id" name="spotify_id">
             <input type="submit" class="btn" value="generate playlist">
             <input type="hidden" name="genre" value="{{ genre }}"">
         </form>
        
         
-    <div class="row">
+    <div class="table-container">
+        <h4>Conensus results by {{ genre }}</h2>
         <div class="col s6">
             <table>
                 <thead>
