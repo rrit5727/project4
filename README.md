@@ -9,6 +9,7 @@
 ## Screenshots
 ### Home page
 ![home page](Readme_imgs/Home_page.png) 
+### Results
 ![results page](Readme_imgs/Results.png) 
 
 ## Technologies used: 
