@@ -18,8 +18,7 @@
 * Postgresql
 * Django
 * Beautiful soup
-* 
-* 
+ 
 
 ## APIs used:
 * ![Spotipy](https://developer.spotify.com/)
