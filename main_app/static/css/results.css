@@ -2,22 +2,49 @@
 
 
 .results-section {
-    background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iMhttps://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
+    /* background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iMhttps://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
-    color: whitesmoke;
-    height: 50vh;
+    background-size: cover; */
+    color: black;
+    height: 70vh;
     
 }
 
-.roll-results {
-    background-color: black;
-    height: 200vh;
+body { 
+    padding: 0;
+    border: 0;
+    margin: 0;
 }
 
-.results-section table {
-    width: 100%;
+.results-section {
+    padding-top: 0;
+    border-top: 0;
+    margin-top: 0;
+
+}
+
+.results-section h3 {
+    color: whitesmoke;
+    text-align: center;
+
+}
+
+.roll-results {
+    background-color: lightskyblue;
+    height: 2000vh;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    background-color: skyblue;
+
+}
+
+table {
+    width: 70%;
 }
 
 .results-section th,
@@ -45,11 +72,37 @@
     width: 15%;
 }
 
+label[for="playlist"],
+label[for="spotify_id"],
+label[for="playlist_length"] {
+    color: whitesmoke;
+    font-size: large;
+}
 
-
-.form {
+input[type="text"],
+input[type="number"] {
     color: whitesmoke;
 }
 
+.consensus-heading {
+    background-color: black;
+}
+
+.form {
+    color: whitesmoke;
+    background-image: url('https://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iMhttps://www.sydney.com/sites/sydney/files/styles/landscape_1400x788/public/2022-08/165661-2.jpg?h=f0fb51a5&itok=3-2co6iM');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+}
+
+.genre-form {
+    padding-top: 10px;    
+    color: whitesmoke;
+    background-color: black;
+    
+    
+}
 
 
